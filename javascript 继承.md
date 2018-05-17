@@ -1,7 +1,7 @@
 ### javascript 继承
 
 JS继承的实现方式：首先得有一个父类。
-
+```
 // 定义一个动物类
 function Animal (name) {
   // 属性
@@ -15,11 +15,11 @@ function Animal (name) {
 Animal.prototype.eat = function(food) {
   console.log(this.name + '正在吃：' + food);
 };
-
+```
 
 1、原型链继承
 核心： 将父类的实例作为子类的原型
-
+```
 function Cat(){ 
 }
 Cat.prototype = new Animal();
@@ -32,7 +32,7 @@ console.log(cat.eat('fish'));
 console.log(cat.sleep());
 console.log(cat instanceof Animal); //true 
 console.log(cat instanceof Cat); //true
-
+```
 
 特点：
 非常纯粹的继承关系，实例是子类的实例，也是父类的实例
@@ -47,7 +47,7 @@ console.log(cat instanceof Cat); //true
 
 2、构造继承
 核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）
-
+```
 function Cat(name){
   Animal.call(this);
   this.name = name || 'Tom';
@@ -59,7 +59,7 @@ console.log(cat.name);
 console.log(cat.sleep());
 console.log(cat instanceof Animal); // false
 console.log(cat instanceof Cat); // true
-
+```
 特点：
 解决了1中，子类实例共享父类引用属性的问题
 创建子类实例时，可以向父类传递参数
@@ -73,7 +73,7 @@ console.log(cat instanceof Cat); // true
 
 3、实例继承
 核心：为父类实例添加新特性，作为子类实例返回。
-
+```
 function Cat(name){
   var instance = new Animal();
   instance.name = name || 'Tom';
@@ -86,7 +86,7 @@ console.log(cat.name);
 console.log(cat.sleep());
 console.log(cat instanceof Animal); // true
 console.log(cat instanceof Cat); // false
-
+```
 
 特点：
 不限制调用方式，不管是new 子类()还是子类(),返回的对象具有相同的效果
@@ -97,6 +97,7 @@ console.log(cat instanceof Cat); // false
 
 
 4、拷贝继承
+```
 function Cat(name){
   var animal = new Animal();
   for(var p in animal){
@@ -111,7 +112,7 @@ console.log(cat.name);
 console.log(cat.sleep());
 console.log(cat instanceof Animal); // false
 console.log(cat instanceof Cat); // true
-
+```
 特点：
 支持多继承
 缺点：
@@ -121,7 +122,7 @@ console.log(cat instanceof Cat); // true
 
 5、组合继承
 核心：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用
-
+```
 function Cat(name){
   Animal.call(this);
   this.name = name || 'Tom';
@@ -135,7 +136,7 @@ console.log(cat.name);
 console.log(cat.sleep());
 console.log(cat instanceof Animal); // true
 console.log(cat instanceof Cat); // true
-
+```
 特点：
 弥补了方式2的缺陷，可以继承实例属性/方法，也可以继承原型属性/方法
 既是子类的实例，也是父类的实例
@@ -148,7 +149,7 @@ console.log(cat instanceof Cat); // true
 
 6、寄生组合继承
 核心：通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点
-
+```
 function Cat(name){
   Animal.call(this);
   this.name = name || 'Tom';
@@ -169,7 +170,7 @@ console.log(cat instanceof Animal); // true
 console.log(cat instanceof Cat); //true
 
 Cat.prototype.constructor = Cat; // 需要修复下构造函数
-
+```
 特点：
 堪称完美
 缺点：
