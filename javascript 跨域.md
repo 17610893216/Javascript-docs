@@ -16,7 +16,7 @@ jsonp、 iframe、window.name、window.postMessage、服务器上设置代理页
 （1）跨域资源共享
 CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。
 对于客户端，我们还是正常使用xhr对象发送ajax请求。唯一需要注意的是，我们需要设置我们的xhr属性withCredentials为true，不然的话，cookie是带不过去的哦，设置： xhr.withCredentials = true;<br>
-对于服务器端，需要在 response header中设置如下两个字段:Access-Control-Allow-Origin: http://www.yourhost.comAccess-Control-Allow-Credentials:true这样，我们就可以跨域请求接口了。
+对于服务器端，需要在 response header中设置如下两个字段:Access-Control-Allow-Origin: `http://www.yourhost.comAccess-Control-Allow-Credentials:true这样，我们就可以跨域请求接口了。`
 
 （2）jsonp
 基本原理就是通过动态创建script标签,然后利用src属性进行跨域。
